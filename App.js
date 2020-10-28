@@ -1,21 +1,57 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, {useState} from 'react';
+import { StyleSheet, Text, View, TextInput } from 'react-native';
+function UselessTextInput(props) {
+return (
+    <TextInput
+          {...props}
+          style={{height:40, borderWidth:1}}
+          editable = {true}
+          maxLength = {40}
+      />
+   );
+}
+export default function UselessTextInputMultiline() {
+   const [myText, setMyText] = useState('yellow');
+   const [myNumber, setMyNumber] = useState(15);
+   const onPressText = () => {
+	//setMyText(text);
+	//setMyNumber(num);
+   }
+    return (
+         <View 
+			style={{
+			   flex: 1,
+			   alignItems: 'center',
+			   justifyContent: 'center',
+			   backgroundColor: myText.toLowerCase(),
+			   borderBottomColor: '#000000',
+			   borderBottomWidth: 1,
+			   }}  >
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+			<Text>{myText}{'\n\n'}</Text>
+
+			<UselessTextInput
+				multiline
+				numberOfLines = {4}
+				value={myText}
+				onChangeText={text => setMyText(text)}
+
+			/>
+
+			<UselessTextInput
+				multiline
+				numberOfLines = {4}
+				value={myNumber}
+				onChangeText={num => setMyNumber(parseInt(num))}
+
+			/>
+
+
+      <Text style={{fontSize:myNumber}}>
+{'\n'}{'\n'}Press Me!</Text>
+		</View>
+    
+	);  
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+
